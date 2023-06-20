@@ -1,0 +1,55 @@
+.userform {
+  display: flex;
+  width: 900px;
+  margin: 0 auto;
+  background-color: rgb(219, 219, 219);
+  border-radius: 20px;
+  overflow: hidden;
+  height: 650px;
+  color: black;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 450px;
+  height: 100%;
+  text-align: center;
+}
+
+.links {
+  width: 100%;
+  justify-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 26px;
+  border-bottom: 1px solid black;
+}
+
+.linkContainer:first-child {
+  border-right: 1px solid black;
+}
+
+.linkContainer {
+  width: 100%;
+  padding: 0.4em;
+}
+
+.pictureContainer {
+  width: 450px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.picture {
+  padding: 0;
+  width: 450px;
+  object-fit: cover;
+  height: 100%;
+}
+
+.active {
+  background-color: rgba(128, 128, 128, 0.212);
+}
