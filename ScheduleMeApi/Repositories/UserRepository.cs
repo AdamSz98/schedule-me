@@ -1,6 +1,4 @@
-﻿using MongoDB.Driver;
-
-namespace ScheduleMeApi.Repositories
+﻿namespace ScheduleMeApi.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -10,13 +8,13 @@ namespace ScheduleMeApi.Repositories
         public UserRepository(IOptions<ApplicationDbContext> context)
         {
             _context = context;
-            var mongoClient = new MongoClient(context.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(context.Value.DatabaseName);
+            var mongoClient = new MongoClient(_context.Value.ConnectionString);
+            var mongoDatabase = mongoClient.GetDatabase(_context.Value.DatabaseName);
             _users = mongoDatabase.GetCollection<User>
-                (context.Value.UsersCollectionName);
+                (_context.Value.UsersCollectionName);
         }
-        public async Task AddUser(User user) => 
-            await _users.InsertOneAsync(user);
+        public Task AddUser(User user) => 
+            _users.InsertOneAsync(user);
 
         public bool UsernameExists(string username) => 
             _users.Find(a => a.Username == username).FirstOrDefault() != null;
