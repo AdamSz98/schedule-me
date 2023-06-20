@@ -1,0 +1,54 @@
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.registerForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.registerForm form p {
+  color: black;
+}
+
+.registerForm input {
+  display: block;
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  border-radius: 10px;
+  padding: 5px;
+  width: 410px;
+  margin: 0 auto;
+}
+
+.registerButton {
+  margin: 0 auto;
+  width: 90%;
+  font-size: 26px;
+  padding: 0.2em;
+  cursor: pointer;
+}
+
+.name input {
+  width: 200px;
+  display: block;
+}
+
+.name {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
