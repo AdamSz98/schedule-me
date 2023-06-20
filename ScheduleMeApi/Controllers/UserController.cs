@@ -56,8 +56,7 @@
             try
             {
                 user.Password = _userHelper.HashedPassword(user.Password);
-                _userRepo.AddUser(user);
-                await _userRepo.SaveAsync();
+                await _userRepo.AddUser(user);
                 return Ok("Succesful Registration.");
             }
             catch (Exception ex)
