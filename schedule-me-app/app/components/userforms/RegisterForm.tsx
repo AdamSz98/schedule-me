@@ -14,9 +14,11 @@ export default function RegisterForm(props: IRegisterFormProps) {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
+  const [username, setUsername] = useState({});
   const [errors, setErrors] = useState({});
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     if (!email) {
       setErrors((errors) => ({
         ...errors,
@@ -61,11 +63,13 @@ export default function RegisterForm(props: IRegisterFormProps) {
     }
 
     try {
-      const res = axios.post("/api/register", {
-        email,
-        firstName,
-        lastName,
-        password,
+      const response = await axios({
+        method: "post",
+        url: "/api/users/register",
+        data: { username, email, firstName, lastName, password },
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
     } catch (error) {
       console.log(error);
@@ -87,6 +91,12 @@ export default function RegisterForm(props: IRegisterFormProps) {
             type="text"
             placeholder="Last name"
             onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
