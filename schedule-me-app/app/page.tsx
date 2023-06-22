@@ -35,14 +35,19 @@ export default function Home() {
           </ul>
         </nav>
         <div className="nav_buttons">
-          <button className="login_btn">Login</button>
-          <button className="get_started">Get started</button>
+          <button className="login_btn">
+            <Link href={"/login"}>Login</Link>
+          </button>
+          <button className="get_started">
+            {" "}
+            <Link href={"/register"}>Get started</Link>
+          </button>
         </div>
       </header>
       <main className={styles.main}>
         <div className="hero_content">
           <div className="title_container">
-            <h1>
+            <h1>  
               Scheduling never been <br /> easier
             </h1>
           </div>
