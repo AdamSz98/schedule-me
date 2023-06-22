@@ -3,6 +3,8 @@ import Link from "next/link";
 import styles from "./styles/loginForm.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export interface ILoginFormProps {}
 
@@ -10,6 +12,8 @@ export default function LoginForm(props: ILoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,7 +32,15 @@ export default function LoginForm(props: ILoginFormProps) {
     }
 
     try {
-      const res = axios.post("/api/login", { email, password });
+      const result = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+
+      router.push("./dashboard");
+
+      console.log(result);
     } catch (error) {
       console.log(error);
     }
