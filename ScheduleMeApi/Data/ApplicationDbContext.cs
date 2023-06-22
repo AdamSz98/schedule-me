@@ -1,13 +1,9 @@
 ﻿namespace ScheduleMeApi.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :
-            base(options)
-        {
-
-        }
-
-        public DbSet<User> Users { get; set; }
+        public string ConnectionString { get; set; } = string.Empty;
+        public string DatabaseName { get; set; } = string.Empty;
+        public string UsersCollectionName { get; set; } = string.Empty;
     }
 }

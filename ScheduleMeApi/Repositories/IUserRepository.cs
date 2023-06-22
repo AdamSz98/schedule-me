@@ -2,8 +2,7 @@
 {
     public interface IUserRepository
     {
-        void AddUser(User user);
-        Task SaveAsync();
+        Task AddUser(User user);
         bool UsernameExists(string username);
         bool EmailExists(string email);
         Task<User> GetUserByUsername(string username);
