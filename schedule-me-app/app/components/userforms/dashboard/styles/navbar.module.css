@@ -1,0 +1,33 @@
+.navbar {
+  padding: 10px;
+  background-color: rgba(194, 194, 194, 0.089);
+  color: aliceblue;
+  display: flex;
+  justify-content: space-around;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.navbarLeft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLink {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.profile {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoutBtn {
+  cursor: pointer;
+  border-radius: 9px;
+  padding: 5px 10px;
+}

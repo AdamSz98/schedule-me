@@ -6,6 +6,8 @@ import styles from "./styles/registerForm.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export interface IRegisterFormProps {}
 
@@ -17,6 +19,8 @@ export default function RegisterForm(props: IRegisterFormProps) {
   const [passwordAgain, setPasswordAgain] = useState("");
   const [username, setUsername] = useState({});
   const [errors, setErrors] = useState({});
+
+  const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -72,6 +76,13 @@ export default function RegisterForm(props: IRegisterFormProps) {
           "Content-Type": "application/json",
         },
       });
+      const result = await signIn("credentials", {
+        email: email,
+        password: password,
+        redirect: false,
+      });
+
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
     }

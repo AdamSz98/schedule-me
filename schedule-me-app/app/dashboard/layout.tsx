@@ -2,35 +2,28 @@
 
 import * as React from "react";
 import style from "./styles/styles.module.css";
-import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import Navbar from "../components/userforms/dashboard/Navbar";
+import { useSession } from "next-auth/react";
 
 export interface INavigationProps {
   children: any;
 }
 
+
+
 export default function DashboardLayout(props: INavigationProps) {
-  const router = useRouter();
-  function signingOut(): void {
-    signOut({ redirect: false, callbackUrl: "/login" });
-    router.push("/");
-  }
-  //külön szedni
+  const { data: session, status }: any = useSession();
+
+
+
   return (
-    <div className={style.layout}>
-      <nav className={style.sidebar}>
-        <Link href={"/dashboard"}>Home</Link>
-        <Link href={"/dashboard"}>My profile</Link>
-        <Link href={"/dashboard"}>Home</Link>
-        <Link href={"/dashboard"}>Home</Link>
-        <Link href={"/dashboard"}>Settings</Link>
-        {/* //külön a gombot is */}
-        <button type="button" onClick={signingOut}>
-          Log out
-        </button>
-      </nav>
+    <>
+      {status === "authenticated" && (
+        <div className={style.layout}>
+          <Navbar />
+        </div>
+      )}
       {props.children}
-    </div>
+    </>
   );
 }
