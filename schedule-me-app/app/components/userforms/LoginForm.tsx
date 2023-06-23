@@ -1,12 +1,12 @@
+"use client";
+
 import * as React from "react";
 import Link from "next/link";
 import styles from "./styles/loginForm.module.css";
 import { useState } from "react";
-import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
 
 export interface ILoginFormProps {}
 
@@ -82,7 +82,7 @@ export default function LoginForm(props: ILoginFormProps) {
             required
           />
         </div>
-        <Link href="/" className={styles.forgotten}>
+        <Link href="/reset" className={styles.forgotten}>
           Forgot your password?
         </Link>
         <button className={styles.loginButton}>

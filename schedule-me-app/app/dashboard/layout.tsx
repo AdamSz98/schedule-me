@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import style from "./styles/styles.module.css";
-import Navbar from "../components/userforms/dashboard/Navbar";
+import Navbar from "../components/dashboard/Navbar";
 import { useSession } from "next-auth/react";
 
 export interface INavigationProps {
