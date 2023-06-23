@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export interface ILoginFormProps {}
 
@@ -47,14 +48,21 @@ export default function LoginForm(props: ILoginFormProps) {
   }
   return (
     <div className={styles.loginForm}>
-      <h1>Welcome</h1>
+      <div className={styles.intro}>
+        <p className={styles.welcomeText}>Welcome Back 👋</p>
+        <p className={styles.welcomeAltText}>
+          Today is a new day. It's your day. You shape it. Sign in to start
+          managing your projects.
+        </p>
+      </div>
+
       <form action="" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Your email:</label>
+        <div className={styles.inputContainer}>
+          <label htmlFor="email">Email:</label>
           <input
             title="Please enter your email address"
             type="email"
-            placeholder="Your email"
+            placeholder="example@email.com"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -62,7 +70,7 @@ export default function LoginForm(props: ILoginFormProps) {
             required
           />
         </div>
-        <div>
+        <div className={styles.inputContainer}>
           <label htmlFor="password">Your password:</label>
           <input
             type="password"
@@ -73,9 +81,44 @@ export default function LoginForm(props: ILoginFormProps) {
             required
           />
         </div>
-        <button className={styles.loginButton}>Login</button>
-        <Link href="./">Forgot your password?</Link>
+        <Link href="/" className={styles.forgotten}>
+          Forgot your password?
+        </Link>
+        <button className={styles.loginButton}>
+          <span>Login</span>
+        </button>
       </form>
+      <div className={styles.socialLogin}>
+        <div className={styles.break}>
+          <div className={styles.breakLine}></div>
+          <p>OR</p>
+          <div className={styles.breakLine}></div>
+        </div>
+        <div className={styles.socialButtons}>
+          <button type="button" className={styles.socialButton}>
+            <Image
+              src="/google_icon.png"
+              width={28}
+              height={28}
+              alt="google icon"
+            ></Image>
+            <p>Sign in with Google</p>
+          </button>
+          <button type="button" className={styles.socialButton}>
+            <Image
+              src="/facebook_icon.png"
+              width={28}
+              height={28}
+              alt="google icon"
+            ></Image>
+            <p>Sign in with Facebook</p>
+          </button>
+        </div>
+        <p className={styles.noAccount}>
+          Don't have an account?
+          <Link href="/register">Sign up</Link>
+        </p>
+      </div>
     </div>
   );
 }

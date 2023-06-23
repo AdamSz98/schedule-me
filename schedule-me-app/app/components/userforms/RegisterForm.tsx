@@ -78,7 +78,14 @@ export default function RegisterForm(props: IRegisterFormProps) {
 
   return (
     <div className={styles.registerForm}>
-      <h1>Sign Up</h1>
+      <div className={styles.intro}>
+        <p className={styles.welcomeText}>Sign up now 👋</p>
+        <p className={styles.welcomeAltText}>
+          Today is a new day. It's your day. You shape it. Sign in to start
+          managing your projects.
+        </p>
+      </div>
+
       <form action="" onSubmit={handleSubmit}>
         <div className={styles.name}>
           <input
@@ -121,7 +128,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
         />
         <button className={styles.registerButton}>Register</button>
         <p>
-          Already have an account? <Link href="/register">Login here.</Link>
+          Already have an account? <Link href="/login">Login here.</Link>
         </p>
       </form>
     </div>
