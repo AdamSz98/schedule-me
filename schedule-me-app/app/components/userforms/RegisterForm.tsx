@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import FormError from "./FormError";
 
 export interface IRegisterFormProps {}
 
@@ -18,52 +19,35 @@ export default function RegisterForm(props: IRegisterFormProps) {
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const [username, setUsername] = useState({});
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState("");
 
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email) {
-      setErrors((errors) => ({
-        ...errors,
-        email: "Please provide an email address",
-      }));
+      setErrors("Please provide an email address");
       return;
     }
     if (!firstName) {
-      setErrors((errors) => ({
-        ...errors,
-        firstName: "Please provide a first name",
-      }));
+      setErrors("Please provide a first name");
       return;
     }
     if (!lastName) {
-      setErrors((errors) => ({
-        ...errors,
-        lastName: "Please provide a last name",
-      }));
+      setErrors("Please provide a last name");
       return;
     }
     if (!password) {
-      setErrors((errors) => ({
-        ...errors,
-        password: "Please provide a password",
-      }));
+      setErrors("Please provide an password");
       return;
     }
     if (!passwordAgain) {
-      setErrors((errors) => ({
-        ...errors,
-        password: "Please provide your password again",
-      }));
+      setErrors("Please provide your password agai");
       return;
     }
     if (password !== passwordAgain) {
-      setErrors((errors) => ({
-        ...errors,
-        passwordCheck: "Your passwords does not match",
-      }));
+      setErrors("Your passwords does not match");
+      console.log(errors);
       return;
     }
 
@@ -83,8 +67,9 @@ export default function RegisterForm(props: IRegisterFormProps) {
       });
 
       router.push("/dashboard");
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      console.log("error", error?.response?.data);
+      setErrors(error?.response?.data.split("Error:")[1]);
     }
   }
 
@@ -94,6 +79,7 @@ export default function RegisterForm(props: IRegisterFormProps) {
         <div className={styles.intro}>
           <p className={styles.welcomeText}>Join us today👋</p>
         </div>
+        {errors && <FormError error={errors} />}
 
         <form action="" onSubmit={handleSubmit}>
           <div className={styles.inputContainer}>
