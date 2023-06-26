@@ -1,13 +1,28 @@
+"use client";
+
 import * as React from "react";
 import UserCalendar from "../components/profile/UserCalendar";
 import DailyView from "../components/profile/DailyView";
+import ProfilePage from "../components/profile/ProfilePage";
+import style from "./styles/userprofile.module.css";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export interface IUserProfileProps {}
 
-export default async function UserProfile({ params }: any) {
-  /*   const userProfile = await akármi */
-  //fetcheli majd a user profilet ha van, ha ninncs akkor error
-  //ha a usernek egy napra van időpontja az legyen zöld
+export default function UserProfile({ params }: any) {
+  //Profilepagebe fetchel majd a cuccokat
+  const [showAvailableSessions, setShowAvailableSessions] = useState(false);
+  const { data: session, status } = useSession();
+
+  function showSessions() {
+    if (status === "authenticated") {
+      setShowAvailableSessions((prev) => !prev);
+    } else {
+      alert("You must login too see a user's sessions");
+    }
+  }
+
   const dailyData = [
     {
       start: 6,
@@ -46,8 +61,12 @@ export default async function UserProfile({ params }: any) {
   return (
     <>
       <h1>Userprofile: {params.username}</h1>
-      <UserCalendar dailyData={dailyData} />
-      <DailyView dailyData={dailyData} />
+      <div className={style.userAndCalendar}>
+        <UserCalendar dailyData={dailyData} showSession={showSessions} />
+        <ProfilePage user={params.username} />
+      </div>
+
+      {showAvailableSessions && <DailyView dailyData={dailyData} />}
     </>
   );
 }
