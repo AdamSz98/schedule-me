@@ -14,9 +14,21 @@ export default function UserProfile({ params }: any) {
   //Profilepagebe fetchel majd a cuccokat
   const [showAvailableSessions, setShowAvailableSessions] = useState(false);
   const { data: session, status } = useSession();
+  const [dayView, setDayView] = useState({});
 
-  function showSessions() {
+  function showSessions(calendarDate: Date) {
+    setDayView({
+      start: 6,
+      end: 7,
+      scheduled: false,
+      activityDate: calendarDate,
+      day: 26,
+      month: 6,
+    });
     if (status === "authenticated") {
+      if (showAvailableSessions) {
+        return;
+      }
       setShowAvailableSessions((prev) => !prev);
     } else {
       alert("You must login too see a user's sessions");
@@ -66,7 +78,9 @@ export default function UserProfile({ params }: any) {
         <ProfilePage user={params.username} />
       </div>
 
-      {showAvailableSessions && <DailyView dailyData={dailyData} />}
+      {showAvailableSessions && (
+        <DailyView dailyData={dailyData} dayView={dayView} />
+      )}
     </>
   );
 }

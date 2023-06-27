@@ -3,29 +3,20 @@ import JoinSession from "./JoinSession";
 
 export interface IDailyViewProps {
   dailyData: { start: number; end: number; scheduled: boolean }[];
+  dayView: any;
 }
 
-export default function DailyView({ dailyData }: IDailyViewProps) {
+export default function DailyView({ dailyData, dayView }: IDailyViewProps) {
   //userek igy megadhatják
   //propba megkapja mettől meddig melyik dátumon foglalható
   //csak a naptár alapján rendereli a datet
 
-  const avaibality = dailyData.map((time) => {
-    if (!time.scheduled) {
-      return (
-        <div>
-          <p>{time.start}</p>
-          <p>{time.end}</p>
-          <p>Already scheduled</p>
-        </div>
-      );
-    } else {
-      return <JoinSession start={time.start} end={time.end} />;
-    }
-  });
   return (
     <>
-      <div>{avaibality}</div>
+      <div>
+        <JoinSession start={dayView.start} end={dayView.end} />;
+      </div>
+      <p>CALENDAR CLICKED INFO: {dayView.activityDate.toLocaleString()}</p>
     </>
   );
 }

@@ -25,13 +25,14 @@ export default function UserCalendar({
 
   function handleCalendarClick(e: any) {
     console.log(e);
-    showSession();
+    showSession(e);
   }
 
   return (
     <>
       <Calendar
         onChange={(e) => handleCalendarClick(e)}
+        minDate={date}
         className="react-calendar"
         tileClassName={({ date, view }) => {
           if (

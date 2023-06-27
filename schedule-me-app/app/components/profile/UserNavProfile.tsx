@@ -10,7 +10,11 @@ export default function UserProfileNav(props: IUserProfileNavProps) {
   const { data: session, status } = useSession();
 
   if (status === "authenticated") {
-    return <div>{session.user.Username}</div>;
+    return (
+      <div>
+        <Link href="/dashboard">{session.user.Username}</Link>
+      </div>
+    );
   } else {
     return (
       <div>
